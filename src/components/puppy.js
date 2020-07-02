@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     maxWidth: '90vw',
   },
   media: {
-    height: '70vh',
+    height: '55vh',
   },
 });
 

@@ -13,10 +13,11 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: '90vw',
+    margin: 'auto',
   },
   media: {
-    height: 140,
+    height: 400,
   },
 });
 
@@ -31,7 +32,7 @@ export default ({ puppy }) => {
           image={
             puppy.image_src !== ''
               ? puppy.image_src
-              : '../images/dog-silhouette.jpg'
+              : '/src/images/dog-silhouette.jpg'
           }
           title='A probably adorable pup'
         />

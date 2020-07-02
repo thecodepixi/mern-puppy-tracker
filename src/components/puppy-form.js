@@ -11,9 +11,10 @@ import {
   Divider,
   Button,
 } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 export default ({ addNewPuppy }) => {
-  const [newPuppy, setNewPuppy] = useState({
+  const defaultState = {
     name: '',
     age: 0,
     breed: '',
@@ -21,7 +22,10 @@ export default ({ addNewPuppy }) => {
     well_behaved: false,
     cute: false,
     adopted: false,
-  });
+    errors: false,
+    submitted: false,
+  };
+  const [newPuppy, setNewPuppy] = useState(defaultState);
 
   const handleChange = (e) => {
     setNewPuppy({
@@ -41,11 +45,25 @@ export default ({ addNewPuppy }) => {
     })
       .then((resp) => resp.json())
       .then((puppy) => addNewPuppy(puppy.data));
+    setNewPuppy({
+      ...defaultState,
+      submitted: true,
+    });
   };
 
   return (
     <>
       <Container>
+        {newPuppy.submitted ? (
+          <Alert severity='info'>
+            <AlertTitle>
+              <span role='img' aria-label='tada emoji'>
+                🎉{' '}
+              </span>
+              New puppy added!
+            </AlertTitle>
+          </Alert>
+        ) : null}
         <Typography component='h2' variant='h2'>
           New Puppy
         </Typography>
@@ -60,6 +78,7 @@ export default ({ addNewPuppy }) => {
               name='name'
               value={newPuppy.name}
               onChange={handleChange}
+              required
             />
           </FormControl>
           <FormControl>
@@ -69,6 +88,7 @@ export default ({ addNewPuppy }) => {
               name='breed'
               value={newPuppy.breed}
               onChange={handleChange}
+              required
             />
           </FormControl>
           <FormControl>
@@ -80,6 +100,7 @@ export default ({ addNewPuppy }) => {
               max='12'
               value={newPuppy.age}
               onChange={handleChange}
+              required
             />
           </FormControl>
           <FormControl>
@@ -120,7 +141,9 @@ export default ({ addNewPuppy }) => {
               onChange={handleChange}
             />
           </FormGroup>
-          <Button type='submit'>Add Puppy</Button>
+          <Button color='primary' type='submit'>
+            Add Puppy
+          </Button>
         </form>
       </Container>
       <Divider />

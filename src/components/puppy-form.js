@@ -68,7 +68,11 @@ export default ({ addNewPuppy }) => {
           New Puppy
         </Typography>
         <form
-          style={{ display: 'flex', flexDirection: 'column' }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            paddingBottom: '1em',
+          }}
           onSubmit={handleSubmit}
         >
           <FormControl>
@@ -146,7 +150,6 @@ export default ({ addNewPuppy }) => {
           </Button>
         </form>
       </Container>
-      <Divider />
     </>
   );
 };

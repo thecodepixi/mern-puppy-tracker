@@ -8,6 +8,10 @@ import Puppy from './components/puppy';
 function App() {
   const [puppies, setPuppies] = useState([]);
 
+  const addNewPuppy = (puppy) => {
+    setPuppies(puppies.concat(puppy));
+  };
+
   useEffect(() => {
     fetch('https://thecodepixi-puppy-api.herokuapp.com/puppies')
       .then((resp) => resp.json())
@@ -17,7 +21,8 @@ function App() {
 
   return (
     <Container maxWidth='lg' id='container'>
-      <PuppyForm />
+      {console.log(puppies)}
+      <PuppyForm addNewPuppy={addNewPuppy} />
       {puppies.map((puppy) => {
         return <Puppy puppy={puppy} />;
       })}

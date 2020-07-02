@@ -12,11 +12,12 @@ import {
   Button,
 } from '@material-ui/core';
 
-export default () => {
+export default ({ addNewPuppy }) => {
   const [newPuppy, setNewPuppy] = useState({
     name: '',
     age: 0,
     breed: '',
+    image_src: '',
     well_behaved: false,
     cute: false,
     adopted: false,
@@ -27,7 +28,19 @@ export default () => {
       ...newPuppy,
       [e.target.name]: e.target.value,
     });
-    console.log(newPuppy[e.target.name]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('https://thecodepixi-puppy-api.herokuapp.com/puppies', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newPuppy),
+    })
+      .then((resp) => resp.json())
+      .then((puppy) => addNewPuppy(puppy.data));
   };
 
   return (
@@ -36,9 +49,12 @@ export default () => {
         <Typography component='h2' variant='h2'>
           New Puppy
         </Typography>
-        <form style={{ display: 'flex', flexDirection: 'column' }}>
+        <form
+          style={{ display: 'flex', flexDirection: 'column' }}
+          onSubmit={handleSubmit}
+        >
           <FormControl>
-            <InputLabel htmlFor='name'>Name</InputLabel>
+            <InputLabel htmlFor='name'>Puppy Name</InputLabel>
             <Input
               type='text'
               name='name'
@@ -66,6 +82,15 @@ export default () => {
               onChange={handleChange}
             />
           </FormControl>
+          <FormControl>
+            <InputLabel htmlFor='image_src'>Puppy Picture Link</InputLabel>
+            <Input
+              type='text'
+              name='image_src'
+              value={newPuppy.image_src}
+              onChange={handleChange}
+            />
+          </FormControl>
           <FormGroup row>
             <FormControlLabel
               htmlFor='cute'
@@ -74,6 +99,7 @@ export default () => {
               control={<Checkbox color='primary' />}
               label='Cute?'
               labelPlacement='start'
+              onChange={handleChange}
             />
             <FormControlLabel
               htmlFor='well_behaved'
@@ -82,6 +108,7 @@ export default () => {
               control={<Checkbox color='primary' />}
               label='Well Behaved?'
               labelPlacement='start'
+              onChange={handleChange}
             />
             <FormControlLabel
               htmlFor='adopted'
@@ -90,6 +117,7 @@ export default () => {
               control={<Checkbox color='primary' />}
               label='Adopted?'
               labelPlacement='start'
+              onChange={handleChange}
             />
           </FormGroup>
           <Button type='submit'>Add Puppy</Button>

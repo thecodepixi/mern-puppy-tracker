@@ -8,10 +8,9 @@ import {
   InputLabel,
   Input,
   Checkbox,
-  Divider,
   Button,
 } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import PuppyAlert from './form-alert';
 
 export default ({ addNewPuppy }) => {
   const defaultState = {
@@ -54,16 +53,7 @@ export default ({ addNewPuppy }) => {
   return (
     <>
       <Container>
-        {newPuppy.submitted ? (
-          <Alert severity='info'>
-            <AlertTitle>
-              <span role='img' aria-label='tada emoji'>
-                🎉{' '}
-              </span>
-              New puppy added!
-            </AlertTitle>
-          </Alert>
-        ) : null}
+        {newPuppy.submitted ? <PuppyAlert /> : null}
         <Typography component='h2' variant='h2'>
           New Puppy
         </Typography>

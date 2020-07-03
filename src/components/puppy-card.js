@@ -60,9 +60,11 @@ export default ({ puppy }) => {
         <Button size='small' color='primary'>
           Share
         </Button>
-        <Button size='small' color='primary'>
-          <Link to={'/puppies/' + puppy._id}>Learn More</Link>
-        </Button>
+        <Link to={'/puppies/' + puppy._id}>
+          <Button size='small' color='primary'>
+            Learn More
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

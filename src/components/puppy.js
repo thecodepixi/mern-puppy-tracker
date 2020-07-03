@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -33,6 +33,7 @@ export default () => {
   const classes = useStyles();
   let { id } = useParams();
   let [puppy, setPuppy] = useState({});
+  let [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     fetch('https://thecodepixi-puppy-api.herokuapp.com/puppies/' + id)
@@ -41,8 +42,24 @@ export default () => {
       .catch((err) => console.error(err));
   }, [id]);
 
+  const deletePuppy = (e) => {
+    fetch(`https://thecodepixi-puppy-api.herokuapp.com/puppies/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => setDeleted(true))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <Container>
+      {deleted ? (
+        <Redirect
+          to={{
+            pathname: '/',
+            state: { deletedPuppy: puppy },
+          }}
+        />
+      ) : null}
       <Card id='puppy' className={classes.root}>
         <CardActionArea>
           <CardMedia
@@ -97,7 +114,7 @@ export default () => {
           <Button size='small' color='primary'>
             Edit
           </Button>
-          <Button size='small' color='primary'>
+          <Button size='small' color='primary' onClick={deletePuppy}>
             Delete
           </Button>
         </CardActions>

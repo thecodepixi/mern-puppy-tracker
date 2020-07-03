@@ -45,7 +45,7 @@ export default ({ addNewPuppy }) => {
             aria-label='menu'
           >
             <Link to='/' className={classes.link}>
-              Puppies!
+              PupFinder
             </Link>
           </Typography>
           <Button color='inherit' onClick={showFormToggle}>

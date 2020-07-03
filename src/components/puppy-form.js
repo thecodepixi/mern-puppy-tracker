@@ -69,7 +69,7 @@ export default ({ addNewPuppy }) => {
           {newPuppy.submitted ? <PuppyAlert state={'submitted'} /> : null}
           {newPuppy.errors ? <PuppyAlert /> : null}
           <Typography component='h2' variant='h2' align='center'>
-            New Puppy
+            Add Puppy
           </Typography>
           <form
             style={{

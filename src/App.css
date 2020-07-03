@@ -2,9 +2,6 @@
   display: flex;
   flex-direction: column;
 }
-
-img {
-  width: 75vw;
-  margin: auto;
-  padding: 1em;
+#puppy {
+  margin: 1em 0;
 }

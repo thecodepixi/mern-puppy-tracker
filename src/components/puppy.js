@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import dogSilhouette from '../images/dogSilhouette.jpg';
 
 const useStyles = makeStyles({
   root: {
@@ -39,11 +40,7 @@ export default () => {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={
-              puppy.image_src !== ''
-                ? puppy.image_src
-                : '../images/dog-silhouette.jpg'
-            }
+            image={puppy.image_src !== '' ? puppy.image_src : dogSilhouette}
             title='A probably adorable pup'
           />
           <CardContent align='center'>
@@ -58,10 +55,18 @@ export default () => {
             >
               {puppy.age} months old
             </Typography>
+            <Typography
+              variant='h4'
+              color='textSecondary'
+              component='p'
+              gutterBottom
+            >
+              {puppy.breed}
+            </Typography>
             <Typography variant='body2' color='textSecondary' component='p'>
               Details:{' '}
               {Object.keys(puppy).map((key) =>
-                puppy[key] === true ? (
+                puppy[key] === true && key !== 'adopted' ? (
                   <span>{key.split('_').join(' ')}, </span>
                 ) : null
               )}

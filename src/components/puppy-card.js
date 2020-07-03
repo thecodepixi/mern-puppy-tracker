@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import dogSilhouette from '../images/dogSilhouette.jpg';
 
 const useStyles = makeStyles({
   root: {
@@ -29,11 +30,7 @@ export default ({ puppy }) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={
-            puppy.image_src !== ''
-              ? puppy.image_src
-              : '/src/images/dog-silhouette.jpg'
-          }
+          image={puppy.image_src !== '' ? puppy.image_src : dogSilhouette}
           title='A probably adorable pup'
         />
         <CardContent>

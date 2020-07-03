@@ -1,32 +1,34 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Container } from '@material-ui/core';
-import PuppyForm from './components/puppy-form';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Main from './components/main';
 import Puppy from './components/puppy';
+import Layout from './components/layout';
 
 function App() {
   const [puppies, setPuppies] = useState([]);
-
-  const addNewPuppy = (puppy) => {
-    setPuppies(puppies.concat(puppy));
-  };
 
   useEffect(() => {
     fetch('https://thecodepixi-puppy-api.herokuapp.com/puppies')
       .then((resp) => resp.json())
       .then((puppies) => setPuppies(puppies))
       .catch((err) => console.error(err));
-  }, []);
+  }, [puppies]);
+
+  const addNewPuppy = (puppy) => {
+    setPuppies(puppies.concat(puppy));
+  };
 
   return (
-    <Container maxWidth='lg' id='container'>
-      {console.log(puppies)}
-      <PuppyForm addNewPuppy={addNewPuppy} />
-      {puppies.map((puppy) => {
-        return <Puppy puppy={puppy} />;
-      })}
-    </Container>
+    <Router>
+      <Layout addNewPuppy={addNewPuppy} />
+      <Switch>
+        <Route exact path='/'>
+          <Main puppies={puppies} />
+        </Route>
+        <Route path='/puppies/:id' children={<Puppy />} />
+      </Switch>
+    </Router>
   );
 }
 

@@ -49,6 +49,16 @@ export default ({ addNewPuppy }) => {
       ...defaultState,
       submitted: true,
     });
+    flashAlert();
+  };
+
+  const flashAlert = () => {
+    setTimeout(() => {
+      setNewPuppy({
+        ...defaultState,
+        submitted: false,
+      });
+    }, 2000);
   };
 
   return (

@@ -20,6 +20,13 @@ const useStyles = makeStyles({
   media: {
     height: '55vh',
   },
+  title: {
+    fontWeight: 300,
+    fontSize: '3.5em',
+  },
+  subtitle: {
+    fontWeight: 300,
+  },
 });
 
 export default () => {
@@ -44,14 +51,21 @@ export default () => {
             title='A probably adorable pup'
           />
           <CardContent align='center'>
-            <Typography gutterBottom variant='h2' component='h1' align='center'>
+            <Typography
+              gutterBottom
+              variant='h3'
+              component='h1'
+              align='center'
+              className={classes.title}
+            >
               {puppy.name}
             </Typography>
             <Typography
-              variant='h3'
+              variant='h4'
               color='textSecondary'
               component='p'
               gutterBottom
+              className={classes.subtitle}
             >
               {puppy.age} months old
             </Typography>
@@ -60,14 +74,15 @@ export default () => {
               color='textSecondary'
               component='p'
               gutterBottom
+              className={classes.subtitle}
             >
               {puppy.breed}
             </Typography>
-            <Typography variant='body2' color='textSecondary' component='p'>
+            <Typography variant='subtitle1' color='textSecondary' component='p'>
               Details:{' '}
               {Object.keys(puppy).map((key) =>
                 puppy[key] === true && key !== 'adopted' ? (
-                  <span>{key.split('_').join(' ')}, </span>
+                  <span>{key.split('_').join(' ')} - </span>
                 ) : null
               )}
             </Typography>

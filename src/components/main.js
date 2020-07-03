@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Grid } from '@material-ui/core';
 import Puppy from './puppy-card';
 
-function Main({ puppies }) {
+export default ({ puppies }) => {
   return (
     <Container maxWidth='lg' id='container'>
       <Grid container spacing={3}>
@@ -16,6 +16,4 @@ function Main({ puppies }) {
       </Grid>
     </Container>
   );
-}
-
-export default Main;
+};

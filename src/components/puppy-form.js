@@ -36,6 +36,7 @@ export default ({ addNewPuppy }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch('https://thecodepixi-puppy-api.herokuapp.com/puppies', {
       method: 'POST',
       headers: {
@@ -65,7 +66,8 @@ export default ({ addNewPuppy }) => {
     <>
       <Card style={{ margin: '1em 0' }}>
         <Container>
-          {newPuppy.submitted ? <PuppyAlert /> : null}
+          {newPuppy.submitted ? <PuppyAlert state={'submitted'} /> : null}
+          {newPuppy.errors ? <PuppyAlert /> : null}
           <Typography component='h2' variant='h2' align='center'>
             New Puppy
           </Typography>
@@ -118,14 +120,14 @@ export default ({ addNewPuppy }) => {
                 onChange={handleChange}
               />
             </FormControl>
-            <FormGroup row>
+            <FormGroup style={{ alignContent: 'center' }}>
               <FormControlLabel
                 htmlFor='cute'
                 name='cute'
                 value='true'
                 control={<Checkbox color='primary' />}
                 label='Cute?'
-                labelPlacement='start'
+                labelPlacement='end'
                 onChange={handleChange}
               />
               <FormControlLabel
@@ -134,7 +136,7 @@ export default ({ addNewPuppy }) => {
                 value='true'
                 control={<Checkbox color='primary' />}
                 label='Well Behaved?'
-                labelPlacement='start'
+                labelPlacement='end'
                 onChange={handleChange}
               />
               <FormControlLabel
@@ -143,7 +145,7 @@ export default ({ addNewPuppy }) => {
                 value='true'
                 control={<Checkbox color='primary' />}
                 label='Adopted?'
-                labelPlacement='start'
+                labelPlacement='end'
                 onChange={handleChange}
               />
             </FormGroup>

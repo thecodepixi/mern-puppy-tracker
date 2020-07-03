@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Main from './components/main';
+import AllPuppies from './components/main';
 import Puppy from './components/puppy';
 import Layout from './components/layout';
 
@@ -24,7 +24,7 @@ function App() {
       <Layout addNewPuppy={addNewPuppy} />
       <Switch>
         <Route exact path='/'>
-          <Main puppies={puppies} />
+          <AllPuppies puppies={puppies} />
         </Route>
         <Route path='/puppies/:id' children={<Puppy />} />
       </Switch>
